@@ -1,6 +1,6 @@
 import os
 import yaml
-import argparse
+# import argparse
 
 def parse_configure():
     parser = argparse.ArgumentParser(description='SSLRec')
@@ -8,14 +8,18 @@ def parse_configure():
     parser.add_argument('--dataset', type=str, default=None, help='Dataset name')
     parser.add_argument('--device', type=str, default='cuda', help='cpu or cuda')
     parser.add_argument('--cuda', type=str, default='0', help='Device number')
-    args = parser.parse_args()
+    # args = parser.parse_args()
 
-    if args.device == 'cuda':
-        os.environ['CUDA_VISIBLE_DEVICES'] = args.cuda
+    device = 'cpu'
+    model = 'dcrec_seq'
+    dataset = 'sports'
 
-    if args.model == None:
+    # if args.device == 'cuda':
+    #     os.environ['CUDA_VISIBLE_DEVICES'] = args.cuda
+
+    if model == None:
         raise Exception("Please provide the model name through --model.")
-    model_name = args.model.lower()
+    model_name = model.lower()
     if not os.path.exists('./config/modelconf/{}.yml'.format(model_name)):
         raise Exception("Please create the yaml file for your model first.")
 
@@ -31,11 +35,11 @@ def parse_configure():
             configs['tune'] = {'enable': False}
 
         # gpu device
-        configs['device'] = args.device
+        configs['device'] = device
 
         # dataset
-        if args.dataset is not None:
-            configs['data']['name'] = args.dataset
+        if dataset is not None:
+            configs['data']['name'] = dataset
 
         # log
         if 'log_loss' not in configs['train']:
