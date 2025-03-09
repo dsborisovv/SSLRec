@@ -5,7 +5,7 @@ optimizer:
 
 train:
   epoch: 3
-  batch_size: 512
+  batch_size: 1024
   save_model: true
   log_loss: false
   test_step: 1
@@ -15,7 +15,7 @@ train:
 test:
   metrics: [recall, ndcg]
   k: [5, 10, 20]
-  batch_size: 512
+  batch_size: 1024
 
 data:
   type: sequential
