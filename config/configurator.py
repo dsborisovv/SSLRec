@@ -10,12 +10,12 @@ def parse_configure():
     # parser.add_argument('--cuda', type=str, default='0', help='Device number')
     # args = parser.parse_args()
 
-    device = 'cpu'
+    device = 'cuda'
     model = 'dcrec_seq'
     dataset = 'sports'
 
-    # if args.device == 'cuda':
-    #     os.environ['CUDA_VISIBLE_DEVICES'] = args.cuda
+    if device == 'cuda':
+        os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
     if model == None:
         raise Exception("Please provide the model name through --model.")
